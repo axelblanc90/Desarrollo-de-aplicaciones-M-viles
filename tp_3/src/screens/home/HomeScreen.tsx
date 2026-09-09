@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -15,10 +15,12 @@ import { useAuth } from '../../context/AuthContext';
 import { useThemeColors } from '../../hooks/useThemeColors';
 import { BankCardView } from '../../components/bank/BankCardView';
 import { QuickActionTile } from '../../components/bank/QuickActionTile';
+import { LogoutConfirmModal } from '../../components/common/LogoutConfirmModal';
 
 export const HomeScreen: React.FC = () => {
   const colors = useThemeColors();
   const { user, signOut, isMockMode } = useAuth();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const fullName =
     user?.user_metadata?.full_name ||
@@ -27,20 +29,7 @@ export const HomeScreen: React.FC = () => {
   const email = user?.email || 'usuario@ibank.com';
 
   const handleLogout = () => {
-    Alert.alert(
-      'Cerrar Sesión',
-      '¿Estás seguro de que deseás cerrar la sesión en este dispositivo?',
-      [
-        { text: 'Cancelar', style: 'cancel' },
-        {
-          text: 'Cerrar Sesión',
-          style: 'destructive',
-          onPress: async () => {
-            await signOut();
-          },
-        },
-      ]
-    );
+    setShowLogoutModal(true);
   };
 
   const handleActionPress = (action: string) => {
@@ -244,7 +233,27 @@ export const HomeScreen: React.FC = () => {
             Sesión activa protegida con Supabase Auth y cifrado bancario TLS 1.3
           </Text>
         </View>
+
+        <TouchableOpacity
+          style={[
+            styles.bottomLogoutButton,
+            { backgroundColor: colors.surface, borderColor: colors.errorLight },
+          ]}
+          onPress={handleLogout}
+          activeOpacity={0.7}
+        >
+          <Ionicons name="log-out-outline" size={18} color={colors.error} />
+          <Text style={[styles.bottomLogoutText, { color: colors.error }]}>
+            Cerrar Sesión
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
+
+      <LogoutConfirmModal
+        visible={showLogoutModal}
+        onCancel={() => setShowLogoutModal(false)}
+        onConfirm={signOut}
+      />
     </SafeAreaView>
   );
 };
@@ -373,5 +382,19 @@ const styles = StyleSheet.create({
     fontSize: 11,
     textAlign: 'center',
     flex: 1,
+  },
+  bottomLogoutButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    marginTop: 18,
+    paddingVertical: 14,
+    borderRadius: 14,
+    borderWidth: 1,
+  },
+  bottomLogoutText: {
+    fontSize: 14,
+    fontWeight: '700',
   },
 });
