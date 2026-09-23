@@ -1,0 +1,8 @@
+{
+  "name": "agropulse-simulator",
+  "version": "1.0.0",
+  "main": "simulator.js",
+  "dependencies": {
+    "kafkajs": "^2.2.4"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "agropulse-worker",
+  "version": "1.0.0",
+  "main": "worker.js",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "kafkajs": "^2.2.4"
+  }
+}
