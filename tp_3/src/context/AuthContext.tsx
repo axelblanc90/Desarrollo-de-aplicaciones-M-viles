@@ -309,13 +309,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const signOut = async () => {
-    if (isSupabaseConfigured) {
-      await supabase.auth.signOut();
+    try {
+      if (isSupabaseConfigured) {
+        await supabase.auth.signOut();
+      }
+    } catch (err) {
+      console.warn('Error during Supabase signOut:', err);
+    } finally {
+      setSession(null);
+      setUser(null);
+      setIsRecoveryMode(false);
+      setRecoveryError(null);
     }
-    setSession(null);
-    setUser(null);
-    setIsRecoveryMode(false);
-    setRecoveryError(null);
   };
 
   const clearRecoveryMode = () => {
