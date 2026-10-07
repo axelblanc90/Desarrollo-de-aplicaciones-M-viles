@@ -1,0 +1,38 @@
+{
+  "name": "network-qos-field-monitor",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "backend": "node backend/server.js"
+  },
+  "dependencies": {
+    "@nozbe/watermelondb": "^0.27.1",
+    "@react-native-community/netinfo": "^11.3.1",
+    "react": "18.2.0",
+    "react-native": "0.73.4",
+    "react-native-geolocation-service": "^5.3.1",
+    "react-native-html-to-pdf": "^0.12.0",
+    "react-native-keychain": "^8.2.0",
+    "react-native-safe-area-context": "^4.9.0",
+    "react-native-screens": "^3.29.0",
+    "react-native-ssh-sftp": "^1.2.0",
+    "react-native-tcp-socket": "^6.0.6",
+    "react-native-udp": "^4.1.6",
+    "react-native-vision-camera": "^3.9.0",
+    "react-native-zeroconf": "^0.13.5",
+    "zustand": "^4.5.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@babel/preset-env": "^7.20.0",
+    "@babel/runtime": "^7.20.0",
+    "@types/react": "^18.2.6",
+    "@types/react-native": "^0.73.0",
+    "typescript": "^5.0.4"
+  }
+}

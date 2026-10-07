@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  network-qos-backend:
+    build: .
+    container_name: qos_snmp_backend
+    ports:
+      - "3001:3001/tcp"     # Throughput & Sync API
+      - "161:161/udp"       # Native SNMP Agent (UDP)
+      - "2222:22/tcp"       # OpenSSH Test Server
+    environment:
+      - HTTP_PORT=3001
+      - SNMP_PORT=161
+    restart: unless-stopped
